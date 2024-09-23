@@ -1,19 +1,18 @@
-import { Button } from "@/components"
+import { NavButton1, NavButton2 } from "@/components"
 
 const styles = {
     container: "px-8 py-6 flex items-center max-w-6xl",
     title: "text-4xl flex-1",
-    btnGroup: "flex gap-x-2"
+    btnGroup: "flex items-center gap-x-6"
 }
 
 const Header = () => {
     return (
-        <div className={[styles.container].join(" ")}>
+        <div className={styles.container}>
             <h3 className={styles.title}>LCD</h3>
             <div className={styles.btnGroup}>
-                <Button isActive={true}>Button 1</Button>
-                <Button>Button 2</Button>
-                <Button>Button 3</Button>
+                <NavButton1>CREATE</NavButton1>
+                <NavButton2>Your Local Customs Domains</NavButton2>
             </div>
         </div>
     )
