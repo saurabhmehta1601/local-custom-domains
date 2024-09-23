@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root {
+    @apply h-full;
+}
+
+html,
+body {
+    @apply h-full;
+    @apply select-none;
+    @apply bg-transparent;
+    @apply text-white font-mono antialiased;
+    @apply overflow-hidden;
+}
+
+body {
+    background: radial-gradient(
+    circle closest-corner at center 50%,
+    #212121,
+    rgb(14, 14, 14) 40%
+  ) ;
+}

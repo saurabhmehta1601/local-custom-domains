@@ -9,9 +9,11 @@ function createWindow(): void {
     width: 900,
     height: 670,
     show: false,
-    transparent: true,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
+    center: true,
+    title: "Local Custom Domains",
+    resizable: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: true,
