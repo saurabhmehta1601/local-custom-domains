@@ -6,3 +6,4 @@ export {default as GetStartedButton} from "./Buttons/GetStartedButton";
 export {default as ReadDocsButton} from "./Buttons/ReadDocsButton";
 export {default as NavButton1} from "./Buttons/NavButton1";
 export {default as NavButton2} from "./Buttons/NavButton2";
+export {default as FormControl} from "./Form/FormControl"

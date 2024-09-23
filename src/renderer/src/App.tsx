@@ -14,11 +14,7 @@ const router = createBrowserRouter([
 
 function App(): JSX.Element {
   return (
-    <div className="h-full">
-      <RouterProvider router={router}>
-
-      </RouterProvider>
-    </div>
+    <RouterProvider router={router} />
   )
 }
 
