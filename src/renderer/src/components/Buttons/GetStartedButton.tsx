@@ -1,3 +1,4 @@
+// BUTTON STYLES FROM https://devdojo.com/tailwindcss/buttons 
 const GetStartedButton = () => {
     return <a href="#_" className="w-72 text-center py-3 relative rounded-sm group  text-white text-2xl font-bold inline-block">
         <span className="absolute top-0 left-0 w-full h-full rounded-sm opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>

@@ -1,3 +1,4 @@
+// BUTTON STYLES FROM https://devdojo.com/tailwindcss/buttons 
 const ReadDocsButton = () => {
     return (
         <a href="#_" className="w-72 text-center relative inline-flex items-center justify-center  py-4 overflow-hidden font-mono font-bold  text-white text-2xl bg-gray-800 rounded-lg group">
