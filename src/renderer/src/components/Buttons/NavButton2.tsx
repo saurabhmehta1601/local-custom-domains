@@ -1,10 +1,14 @@
 import { ComponentProps } from "react"
 
-const NavButton2 = (props: ComponentProps<'button'>) => {
+const btnStyles = "inline-block py-3 text-xl text-white bg-gray-800 px-7 hover:bg-gray-700 rounded-xl"
+
+const NavButton2 = (props: ComponentProps<'a'>) => {
     return (
-        <a href="#_" className="inline-block py-3 text-xl text-white bg-gray-800 px-7 hover:bg-gray-700 rounded-xl">
-            {props.children}
-        </a>
+        <a
+            href="#_"
+            className={btnStyles}
+            {...props}
+        />
     )
 }
 

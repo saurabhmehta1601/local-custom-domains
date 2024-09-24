@@ -15,7 +15,7 @@ const Header = () => {
             <h3 className={styles.title}>LCD</h3>
             <div className={styles.btnGroup}>
                 <NavButton1 onClick={() => navigate("/create")}>CREATE</NavButton1>
-                <NavButton2>Your Local Customs Domains</NavButton2>
+                <NavButton2 onClick={() => navigate("/domains")}>Your Domains</NavButton2>
             </div>
         </div>
     )
