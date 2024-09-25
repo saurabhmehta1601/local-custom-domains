@@ -1,5 +1,5 @@
 import LocalDNSService from "@/services/LocalDNSService";
-import { ipcMain, IpcMainInvokeEvent } from "electron";
+import { ipcMain } from "electron";
 import { EVENTS } from "@shared/constants"
 import { IPCEventResponse } from "@shared/interfaces";
 
@@ -26,13 +26,17 @@ export const initializeIPCHandlers = () => {
         }
     })
 
-    ipcMain.handle(EVENTS.CHECK_DOMAIN, async function handleDomainCheck(_event: IpcMainInvokeEvent, domainName: string){
+    ipcMain.handle(EVENTS.GET_ALL_DOMAINS, async function getAllDomains(_event){
         try{
-            const res = await localDNSService.checkDomain(domainName)
-            console.log({ res })
+            const allDomains = await localDNSService.getAllDomains()
+            return {
+                data: allDomains
+            } as IPCEventResponse
         }
         catch(err){
-            console.log("Failed to check domain.")
+            return {
+                error: "Unknown error occured while fetching all domains."
+            }
         }
     })
 
