@@ -30,13 +30,18 @@ class LocalDNSService {
      * @returns {Promise<void>} Resolved if domain name added successfully else rejects if domain already exists or failed to add domain.
      */
     async addDomain(domainName: string): Promise<void>  {
-        const domainExistsAlready = await this.checkDomain(domainName) 
-        if (domainExistsAlready) {
-            throw new Error(`Domain ${domainName} already exists.`)
+        try{
+            const domainExistsAlready = await this.checkDomain(domainName) 
+            if (domainExistsAlready) {
+                throw new Error(`Domain ${domainName} already exists.`)
+            }
+            
+            const entry = `${this.localIP} ${domainName}\n`;
+            await fs.appendFile(this.hostsFilePath, entry, { flag: 'a' });
         }
-        
-        const entry = `${this.localIP} ${domainName}\n`;
-        await fs.appendFile(this.hostsFilePath, entry, { flag: 'a' });
+        catch(err){
+            throw new Error("Failed to add domain name.") 
+        }
     }
 
     /**

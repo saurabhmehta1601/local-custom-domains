@@ -5,7 +5,7 @@ declare global {
     // electron: ElectronAPI
     // TODO: Add properties exposed in Rendered
     context: {
-
+      checkDomain: (domainName: string) => Promise<boolean>
     }
   }
 }
