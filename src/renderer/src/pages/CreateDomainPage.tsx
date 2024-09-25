@@ -19,11 +19,23 @@ function CreateDomainPage() {
     const [port, setPort] = useState("")
     const [domain, setDomain] = useState("")
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        toast.success("Domain created successfully.")
-        setPort("")
-        setDomain("")
+
+        try {
+            const res = await window.context.createDomain(domain)
+            console.log({ res })
+
+            res.error ? toast.error(res.error) : toast.success(res.data)
+        }
+        catch (err) {
+            toast.error("Failed to create domain, unknown exception occurred.")
+        }
+        finally {
+            setPort("")
+            setDomain("")
+        }
+
     }
 
     return (

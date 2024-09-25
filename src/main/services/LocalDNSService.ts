@@ -1,13 +1,16 @@
 import fs from "fs/promises"
+import path from "path";
 
 class LocalDNSService {
-    private hostsFilePath: string;
     private localIP: string;
+    private hostsFilePath: string;
+    private customEntryIdentifierComment: string;
 
     constructor() {
+        this.customEntryIdentifierComment = "# Local Custom Domain"
         this.localIP = '127.0.0.1'; // Localhost IP
         if(process.platform === "win32"){
-            this.hostsFilePath = "C:\Windows\System32\drivers\etc\hosts";
+            this.hostsFilePath = path.join("C:", "Windows", "System32", "drivers", "etc", "hosts");
         } else{
             this.hostsFilePath = '/etc/hosts';
         }
@@ -20,7 +23,7 @@ class LocalDNSService {
      */
     async checkDomain(domainName: string): Promise<boolean> {
         const entries = await this._readHostsFile();
-        return entries.includes(`${this.localIP} ${domainName}`);
+        return  entries.some(entry => entry.includes(domainName));
     }
 
     /**
@@ -31,12 +34,7 @@ class LocalDNSService {
      */
     async addDomain(domainName: string): Promise<void>  {
         try{
-            const domainExistsAlready = await this.checkDomain(domainName) 
-            if (domainExistsAlready) {
-                throw new Error(`Domain ${domainName} already exists.`)
-            }
-            
-            const entry = `${this.localIP} ${domainName}\n`;
+            const entry = this._getDNSDomainEntry(domainName);
             await fs.appendFile(this.hostsFilePath, entry, { flag: 'a' });
         }
         catch(err){
@@ -53,7 +51,7 @@ class LocalDNSService {
         try{
             const entries = await this._readHostsFile();
             return entries
-                .filter((entry: string) => entry.startsWith(this.localIP))
+                .filter((entry: string) => entry.includes(this.customEntryIdentifierComment))
                 .map(entry => entry.split(' ')[1]); // Extract domain names
         }
         catch(err: unknown){
@@ -70,6 +68,16 @@ class LocalDNSService {
     private async _readHostsFile(): Promise<string[]> {
         const data = await fs.readFile(this.hostsFilePath, 'utf-8');
         return data.split('\n').filter((line: string) => line.trim() !== '');
+    }
+
+    /**
+     * gets the domain name entry in valid format for given domainName in file /etc/hosts
+     * 
+     * @param domainName The domain name whose entry is to be created in /etc/hosts.
+     * @returns {string} The entry for the local domain in /etc/hosts in valid format.
+     */
+    private _getDNSDomainEntry(domainName: string): string{
+        return `${this.localIP} ${domainName} ${this.customEntryIdentifierComment} \n`
     }
 }
 
