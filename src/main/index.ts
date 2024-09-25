@@ -28,7 +28,6 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
-    initializeIPCHandlers()
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -50,6 +49,7 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
 
+  initializeIPCHandlers()
   dnsServer = startServer()
   createWindow()
 
