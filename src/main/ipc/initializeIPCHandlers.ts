@@ -7,7 +7,7 @@ const localDNSService = new LocalDNSService()
 
 export const initializeIPCHandlers = () => {
 
-    ipcMain.handle(EVENTS.CREATE_DOMAIN, async function createDomain(_event, domainName){
+    ipcMain.handle(EVENTS.CREATE_DOMAIN, async function createDomain(_event, domainName, port){
         try{
             const domainAlreadyExists = await localDNSService.checkDomain(domainName)
             if(domainAlreadyExists){
@@ -15,29 +15,30 @@ export const initializeIPCHandlers = () => {
                     error: "Domain Already Exists."
                 } as IPCEventResponse
             }
-            await localDNSService.addDomain(domainName)
+            await localDNSService.addDomain(domainName, port)
             return {
                 data: "Domain Added Successfully.",
             } as IPCEventResponse
         } catch(err: any){
+            const errorMessage = err instanceof Error && "message" in err ? err.message : "Unknown exception occured while creating domain."
             return {
-                error: ( err && err.message ) ? err.message : "Unknown exception occured."
+                error: errorMessage 
             } as IPCEventResponse
         }
     })
 
-    ipcMain.handle(EVENTS.GET_ALL_DOMAINS, async function getAllDomains(_event){
+    ipcMain.handle(EVENTS.GET_ALL_DOMAINS_WITH_PORT, async function getAllDomainsWithPort(_event){
         try{
-            const allDomains = await localDNSService.getAllDomains()
+            const allDomains = await localDNSService.getAllDomainsWithPort()
             return {
                 data: allDomains
             } as IPCEventResponse
         }
         catch(err){
+            const errorMessage = err instanceof Error && "message" in err ? err.message : "Unknown error occured while getting all domains."
             return {
-                error: "Unknown error occured while fetching all domains."
+                error: errorMessage
             } as IPCEventResponse
         }
     })
-
 }

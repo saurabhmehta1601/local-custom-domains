@@ -8,8 +8,8 @@ if(!process.contextIsolated){
 try{
   // TODO: add contents that needs to be exposed
   contextBridge.exposeInMainWorld('context', {
-    createDomain: (domainName: string) => ipcRenderer.invoke(EVENTS.CREATE_DOMAIN, domainName),
-    getAllDomains: () => ipcRenderer.invoke(EVENTS.GET_ALL_DOMAINS)
+    createDomain: (domainName: string, port: string) => ipcRenderer.invoke(EVENTS.CREATE_DOMAIN, domainName, port),
+    getAllDomainsWithPort: () => ipcRenderer.invoke(EVENTS.GET_ALL_DOMAINS_WITH_PORT)
   })
 } catch(err){
   console.error(err)

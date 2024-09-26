@@ -25,7 +25,7 @@ function CreateDomainPage() {
         e.preventDefault()
 
         try {
-            const res = await window.context.createDomain(domain)
+            const res = await window.context.createDomain(domain, port)
             console.log({ res })
 
             res.error ? toast.error(res.error) : toast.success(res.data)

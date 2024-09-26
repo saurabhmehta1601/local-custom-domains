@@ -9,7 +9,7 @@ const dnsService = new LocalDNSService()
 
 app.get("/all", async (_req, res) => {
     try{
-        const allDomains = await dnsService.getAllDomains()
+        const allDomains = await dnsService.getAllDomainsWithPort()
         return res.status(200).json({
             domains: allDomains
         })

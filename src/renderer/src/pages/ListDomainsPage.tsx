@@ -9,7 +9,7 @@ const ListDomainsPage = () => {
     const listAllDomains = async () => {
 
         try {
-            const res = await window.context.getAllDomains()
+            const res = await window.context.getAllDomainsWithPort()
             if (res.data) {
                 setAllDomains(res.data)
             }
@@ -29,7 +29,7 @@ const ListDomainsPage = () => {
     }, [])
     return (
         <PageLayout>
-            {allDomains.map((domain) => <li key={domain}>{JSON.stringify(domain)}</li>)}
+            {allDomains.map((domain) => <li key={domain.name}>{JSON.stringify(domain)}</li>)}
         </PageLayout>
     )
 }
