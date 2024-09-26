@@ -7,23 +7,22 @@ app.use(express.json())
 
 const dnsService = new LocalDNSService()
 
-app.get("/all", async (_req, res) => {
-    try{
-        const allDomains = await dnsService.getAllDomainsWithPort()
-        return res.status(200).json({
-            domains: allDomains
-        })
-    }
-    catch(err: any){
-        return res.status(500).json({
-            err: err.message
-        })
-    }
-})
 
 app.get("*", async function(req: Request, res){
     const hostname = req.hostname
     const domainNameFound = await dnsService.checkDomain(hostname)
+
+    const allDomains = await dnsService.getAllDomainsWithPort()
+    const matchedDomain = allDomains.find(d => d.name.toLowerCase() === hostname.toLowerCase())
+
+    if(matchedDomain){
+        return res.redirect("http://localhost:" + matchedDomain.port)
+    }
+    else{
+        res.status(404).json({
+            error: "Domain not found."
+        })
+    }
 
     // res.send("Hello from locally running DNS server 👋.No matter where you Go I will follow")
 
