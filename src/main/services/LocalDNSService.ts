@@ -37,8 +37,17 @@ class LocalDNSService {
             const entry = this._getDNSDomainEntry(domainName);
             await fs.appendFile(this.hostsFilePath, entry, { flag: 'a' });
         }
-        catch(err){
-            throw new Error("Failed to add domain name.") 
+        catch(err: any){
+
+            if(err.code === "ENOENT"){
+                throw new Error("Failed to find hosts file to write DNS Entry.")
+            }
+
+            if(err.code === "EPERM"){
+                throw new Error("Permission denied to create DNS entry, please run application as Administrator.")
+            }
+            console.error(err)
+            throw new Error("Unknown exception occurred, failed to add domain name.") 
         }
     }
 
