@@ -1,13 +1,9 @@
 import { ComponentProps } from 'react'
 import Header from './Header'
 
-const styles = {
-
-}
-
 const PageLayout = (props: ComponentProps<"div">) => {
     return (
-        <div className='h-screen'>
+        <div>
             <Header />
             {props.children}
         </div>

@@ -1,8 +1,8 @@
-import PageLayout from "@/components/PageLayout"
+import { PageLayout, Table } from "@/components"
 import { useEffect, useState } from "react"
 
 const ListDomainsPage = () => {
-    const [allDomains, setAllDomains] = useState([])
+    const [allDomains, setAllDomains] = useState<{ name: string, port: string }[]>([])
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(true)
 
@@ -29,7 +29,11 @@ const ListDomainsPage = () => {
     }, [])
     return (
         <PageLayout>
-            {allDomains.map((domain) => <li key={domain.name}>{JSON.stringify(domain)}</li>)}
+            <Table
+                className="mt-8 w-fit mx-auto"
+                headers={["DOMAIN", "PORT"]}
+                rows={allDomains.map((domain) => ([domain.name, domain.port]))}
+            />
         </PageLayout>
     )
 }

@@ -11,16 +11,15 @@
 @tailwind utilities;
 
 #root {
-    @apply h-full;
+    @apply min-h-full;
 }
 
 html,
 body {
-    @apply h-full;
+    @apply min-h-full pb-8;
     @apply select-none;
     @apply bg-transparent;
     @apply text-white font-mono antialiased;
-    @apply overflow-hidden;
 }
 
 body {
@@ -48,3 +47,19 @@ h1 {
 h3 {
     @apply text-4xl font-bold;
 }
+
+/* Hide scrollbar for modern browsers */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #000;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(108, 108, 108, 0.8); /* Customize thumb color */
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.2); /* Customize track color */
+  }
