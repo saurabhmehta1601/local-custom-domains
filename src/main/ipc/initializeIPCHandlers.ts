@@ -36,7 +36,7 @@ export const initializeIPCHandlers = () => {
         catch(err){
             return {
                 error: "Unknown error occured while fetching all domains."
-            }
+            } as IPCEventResponse
         }
     })
 

@@ -1,3 +1,4 @@
+import PageLayout from "@/components/PageLayout"
 import { useEffect, useState } from "react"
 
 const ListDomainsPage = () => {
@@ -7,19 +8,19 @@ const ListDomainsPage = () => {
 
     const listAllDomains = async () => {
 
-        try{
+        try {
             const res = await window.context.getAllDomains()
-            if(res.data){
+            if (res.data) {
                 setAllDomains(res.data)
             }
-            else{
+            else {
                 setError("Error while loading domains")
             }
         }
-        catch(err){
+        catch (err) {
 
         }
-        finally{
+        finally {
             setIsLoading(false)
         }
     }
@@ -27,9 +28,9 @@ const ListDomainsPage = () => {
         listAllDomains()
     }, [])
     return (
-        <div>
-            {JSON.stringify({allDomains, error, isLoading})}
-        </div>
+        <PageLayout>
+            {allDomains.map((domain) => <li key={domain}>{JSON.stringify(domain)}</li>)}
+        </PageLayout>
     )
 }
 

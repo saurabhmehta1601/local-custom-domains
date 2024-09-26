@@ -1,11 +1,11 @@
-import { Header, Banner } from "@/components"
+import {  Banner } from "@/components"
+import PageLayout from "@renderer/components/PageLayout"
 
 const HomePage = () => {
     return (
-        <>
-            < Header />
+        <PageLayout>
             <Banner />
-        </>
+        </PageLayout>
     )
 }
 

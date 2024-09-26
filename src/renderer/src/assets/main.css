@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Ultra';
+    src: url('./fonts/Ultra-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,9 +24,27 @@ body {
 }
 
 body {
-    background: radial-gradient(
-    circle closest-corner at center 50%,
-    #212121,
-    rgb(14, 14, 14) 40%
-  ) ;
+    @apply bg-gradient-to-r from-slate-900 to-slate-700;
+    background: radial-gradient(circle closest-corner at center 50%,
+            #353232,
+            rgb(35, 34, 34) 40%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Ultra', sans-serif;
+    @apply tracking-widest;
+}
+
+h1 {
+    @apply text-6xl font-extrabold;
+}
+
+
+h3 {
+    @apply text-4xl font-bold;
 }

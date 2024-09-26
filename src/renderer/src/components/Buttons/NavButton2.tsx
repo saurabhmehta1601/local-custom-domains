@@ -1,6 +1,6 @@
 import { ComponentProps } from "react"
 
-const btnStyles = "inline-block py-3 text-xl text-white bg-gray-800 px-7 hover:bg-gray-700 rounded-xl"
+const btnStyles = "py-3 px-7 inline-block text-xl text-white hover:opacity-60 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-900"
 
 const NavButton2 = (props: ComponentProps<'a'>) => {
     return (
