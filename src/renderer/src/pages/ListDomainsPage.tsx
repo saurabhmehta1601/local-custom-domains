@@ -44,7 +44,12 @@ const ListDomainsPage = () => {
                     headers={["DOMAIN", "PORT"]}
                     rows={allDomains.map((domain) => ([domain.name, domain.port]))} 
                 />
-                
+                :
+                <div className={styles.noDomainsBannerContainer}>
+                    <h5 className={styles.noDomainHeadingText}>
+                        No local custom domain created yet...
+                    </h5>
+                </div>
             }
 
         </PageLayout>
