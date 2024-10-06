@@ -6,8 +6,8 @@ declare global {
     // electron: ElectronAPI
     // TODO: Add properties exposed in Rendered
     context: {
-      createDomain: (domainName: string, port: string) => Promise<IPCEventResponse>,
-      getAllDomainsWithPort: () => Promise<IPCEventResponse> 
+      createDomain: (domainName: string, port: string) => Promise<IPCEventResponse>
+      getAllDomainsWithPort: () => Promise<IPCEventResponse>
     }
   }
 }

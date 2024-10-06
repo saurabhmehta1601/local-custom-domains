@@ -1,1 +1,1 @@
-export {default as LocalDNSService} from "./LocalDNSService"
+export { default as LocalDNSService } from './LocalDNSService'

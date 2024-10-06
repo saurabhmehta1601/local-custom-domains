@@ -1,32 +1,29 @@
 @font-face {
-    font-family: 'Ultra';
-    src: url('./fonts/Ultra-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Ultra';
+  src: url('./fonts/Ultra-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 #root {
-    @apply min-h-full;
+  @apply min-h-full;
 }
 
 html,
 body {
-    @apply min-h-full pb-8;
-    @apply select-none;
-    @apply bg-transparent;
-    @apply text-white font-mono antialiased;
+  @apply min-h-full pb-8;
+  @apply select-none;
+  @apply bg-transparent;
+  @apply text-white font-mono antialiased;
 }
 
 body {
-    @apply bg-gradient-to-r from-slate-900 to-slate-700;
-    background: radial-gradient(circle closest-corner at center 50%,
-            #353232,
-            rgb(35, 34, 34) 40%);
+  @apply bg-gradient-to-r from-slate-900 to-slate-700;
+  background: radial-gradient(circle closest-corner at center 50%, #353232, rgb(35, 34, 34) 40%);
 }
 
 h1,
@@ -35,31 +32,30 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Ultra', sans-serif;
-    @apply tracking-widest;
+  font-family: 'Ultra', sans-serif;
+  @apply tracking-widest;
 }
 
 h1 {
-    @apply text-6xl font-extrabold;
+  @apply text-6xl font-extrabold;
 }
 
-
 h3 {
-    @apply text-4xl font-bold;
+  @apply text-4xl font-bold;
 }
 
 /* Hide scrollbar for modern browsers */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    background-color: #000;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(108, 108, 108, 0.8); /* Customize thumb color */
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.2); /* Customize track color */
-  }
+  width: 8px;
+  height: 8px;
+  background-color: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(108, 108, 108, 0.8); /* Customize thumb color */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.2); /* Customize track color */
+}
