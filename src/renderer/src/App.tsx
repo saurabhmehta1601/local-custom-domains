@@ -1,7 +1,7 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { HomePage, CreateDomainPage, ListDomainsPage } from '@/pages'
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
     element: <HomePage />
@@ -14,7 +14,9 @@ const router = createBrowserRouter([
     path: '/domains',
     element: <ListDomainsPage />
   }
-])
+]
+
+const router = createHashRouter(routes)
 
 function App(): JSX.Element {
   return <RouterProvider router={router} />
