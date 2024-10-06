@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 
 const ListDomainsPage = () => {
     const [allDomains, setAllDomains] = useState<{ name: string, port: string }[]>([])
-    const [error, setError] = useState("")
-    const [isLoading, setIsLoading] = useState(true)
+    const [_error, setError] = useState("")
+    const [_isLoading, setIsLoading] = useState(true)
 
     const listAllDomains = async () => {
 
