@@ -1,4 +1,4 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom'
+import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { HomePage, CreateDomainPage, ListDomainsPage } from '@/pages'
 
 const routes = [
@@ -16,7 +16,7 @@ const routes = [
   }
 ]
 
-const router = createHashRouter(routes)
+const router = createMemoryRouter(routes)
 
 function App(): JSX.Element {
   return <RouterProvider router={router} />
