@@ -3,14 +3,15 @@
 First of all you can start by giving star to this respository so that you can easily find it later.
 
 ## Contributing workflow:
+
 In order to contribute to this repository, follow these steps:
 
 #### STEP 1 - Creating new Issue ( Optional )
 
-Before creating an issue please check if similar issue already exists or not. 
+Before creating an issue please check if similar issue already exists or not.
 If you want to work on an existing issue, please skip this step and move to the next.
 
-The very first step of contributing is to create a `issue` in the issue section of this repository. The issue should be related to the project and should not be a duplicate one. 
+The very first step of contributing is to create a `issue` in the issue section of this repository. The issue should be related to the project and should not be a duplicate one.
 
 #### STEP 2 - Creating new Branch
 
@@ -29,7 +30,7 @@ Add the desired changes by commiting them to the branch you created. For writing
 Once you are ready to propose the changes push your branch to GitHub and create a pull request from your branch to `develop` branch where the latest accepted changes resides.
 We merge the develop branch periodically to main branch.
 
-Also, if you have made all the changes to the pull request and the pull request is ready to be reviewed for merging than add label `review needed` to the pull request else if you plan on working on the pull request add label `work in progress`. 
+Also, if you have made all the changes to the pull request and the pull request is ready to be reviewed for merging than add label `review needed` to the pull request else if you plan on working on the pull request add label `work in progress`.
 
 #### STEP 5 - Link the Pull Request to issue
 
