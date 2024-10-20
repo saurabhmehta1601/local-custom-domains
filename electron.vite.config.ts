@@ -17,10 +17,9 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
-        "@shared": resolve("src/shared")
+        '@shared': resolve('src/shared')
       }
     }
-
   },
   renderer: {
     assetsInclude: 'src/renderer/assets/**',
@@ -30,7 +29,7 @@ export default defineConfig({
         '@shared': resolve('src/shared'),
         '@/components': resolve('src/renderer/src/components'),
         '@/pages': resolve('src/renderer/src/pages'),
-        '@/assets': resolve('src/renderer/src/assets'),
+        '@/assets': resolve('src/renderer/src/assets')
       }
     },
     plugins: [react()]

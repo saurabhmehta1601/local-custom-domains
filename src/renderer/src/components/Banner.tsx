@@ -1,6 +1,9 @@
+
 import { GetStartedButton, ReadDocsButton } from '@/components';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GetStartedButton, ReadDocsButton } from '@/components'
+
 
 const styles = {
   banner: 'justify-center items-center',
@@ -10,6 +13,7 @@ const styles = {
 };
 
 const Banner = () => {
+  
   const showToast = () => {
     toast.info('This feature is under development.');
   };
@@ -20,7 +24,7 @@ const Banner = () => {
         <h3 className={styles.bannerText}>Local Custom Domains</h3>
       </div>
       <div className={styles.btnGroup}>
-
+        
         <button onClick={showToast}>
           <GetStartedButton />
         </button>
@@ -36,5 +40,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
-
+export default Banner

@@ -1,4 +1,4 @@
 export interface IPCEventResponse {
-    error?: string,
-    data?: any
+  error?: string
+  data?: any
 }
