@@ -17,20 +17,20 @@ const styles = {
   btnGroup: 'flex justify-between mt-12'
 }
 
-function CreateDomainPage() {
+function CreateDomainPage(): JSX.Element {
   const navigate = useNavigate()
 
   const [port, setPort] = useState('')
   const [domain, setDomain] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault()
 
     try {
       const res = await window.context.createDomain(domain, port)
       console.log({ res })
 
-      res.error ? toast.error(res.error) : toast.success(res.data)
+      res.success ? toast.success(res.data) : toast.error(res.error)
     } catch (err) {
       toast.error('Failed to create domain, unknown exception occurred.')
     } finally {

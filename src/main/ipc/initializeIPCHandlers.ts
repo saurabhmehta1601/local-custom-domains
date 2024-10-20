@@ -7,26 +7,16 @@ const localDNSService = new LocalDNSService()
 
 export const initializeIPCHandlers = () => {
   ipcMain.handle(EVENTS.CREATE_DOMAIN, async function createDomain(_event, domainName, port) {
-    try {
-      const domainAlreadyExists = await localDNSService.checkDomain(domainName)
-      if (domainAlreadyExists) {
-        return {
-          error: 'Domain Already Exists.'
-        } as IPCEventResponse
-      }
-      await localDNSService.addDomain(domainName, port)
-      return {
-        data: 'Domain Added Successfully.'
-      } as IPCEventResponse
-    } catch (err: any) {
-      const errorMessage =
-        err instanceof Error && 'message' in err
-          ? err.message
-          : 'Unknown exception occured while creating domain.'
-      return {
-        error: errorMessage
-      } as IPCEventResponse
+    let res: IPCEventResponse
+
+    const domainAlreadyExists = await localDNSService.checkDomain(domainName)
+    if (domainAlreadyExists) {
+      res = { success: false, error: 'Domain Already Exists.' }
+      return res
     }
+
+    res = await localDNSService.addDomain(domainName, port)
+    return res
   })
 
   ipcMain.handle(EVENTS.GET_ALL_DOMAINS_WITH_PORT, async function getAllDomainsWithPort(_event) {

@@ -9,8 +9,8 @@ const styles = {
     'w-fit mx-auto mt-48 mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-slate-300 to-slate-500'
 }
 
-const Banner = () => {
-  const showToast = () => {
+const Banner = (): JSX.Element => {
+  const showToast = (): void => {
     toast.info('This feature is under development.')
   }
 

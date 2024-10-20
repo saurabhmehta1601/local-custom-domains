@@ -1,4 +1,3 @@
-import { ElectronAPI } from '@electron-toolkit/preload'
 import { IPCEventResponse } from '@shared/interfaces'
 
 declare global {

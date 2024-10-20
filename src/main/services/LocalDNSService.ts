@@ -1,4 +1,7 @@
-import fs from 'fs/promises'
+// import fs from 'fs/promises'
+// import { appendFileSync } from 'fs'
+import { IPCEventResponse } from '@shared/interfaces'
+import fs from 'fs'
 import path from 'path'
 
 class LocalDNSService {
@@ -29,9 +32,28 @@ class LocalDNSService {
    *
    * @param {string} domainName  The domain name to be added.
    * @returns {Promise<void>} Resolved if domain name added successfully else rejects if domain already exists or failed to add domain.
+   *
+   * @throws Error If failed to create domain
    */
-  async addDomain(domainName: string, port: number): Promise<void> {
-    await this._appendHostsFile(domainName, port)
+  async addDomain(domainName: string, port: number): Promise<IPCEventResponse> {
+    const entry = this._getDNSDomainEntry(domainName, port)
+    let error
+    let data
+
+    try {
+      fs.appendFileSync(this.hostsFilePath, entry, { flag: 'a' })
+      data = 'Successfully added domain name - ' + domainName
+    } catch (err: any) {
+      if (err.code === 'EPERM') {
+        error = `Permissions required to add domain.
+        Please try running application as Administrator.`
+      } else {
+        error = 'Unknown exception occurred when trying to create domain name.'
+      }
+    }
+
+    const res: IPCEventResponse = { success: false, data, error }
+    return res
   }
 
   /**
@@ -54,7 +76,7 @@ class LocalDNSService {
    */
   private async _readHostsFile(): Promise<string[]> {
     try {
-      const data = await fs.readFile(this.hostsFilePath, 'utf-8')
+      const data = fs.readFileSync(this.hostsFilePath, 'utf-8')
       return data.split('\n').filter((line: string) => line.trim() !== '')
     } catch (err: unknown) {
       if (err instanceof Error && 'code' in err) {
@@ -70,28 +92,11 @@ class LocalDNSService {
     }
   }
 
-  private async _appendHostsFile(domainName: string, port: number): Promise<void> {
-    try {
-      const entry = this._getDNSDomainEntry(domainName, port)
-      fs.appendFile(this.hostsFilePath, entry, { flag: 'a' })
-    } catch (err) {
-      if (err instanceof Error && 'code' in err) {
-        if (err.code === 'ENOENT') throw new Error('Failed to find hosts file to write DNS Entry.')
-
-        if (err.code === 'EPERM')
-          throw new Error(
-            'Permission denied to create DNS entry, please run application as Administrator.'
-          )
-      }
-      console.error(err)
-      throw new Error('Unknown exception occurred, failed to add domain name.')
-    }
-  }
-
   /**
-   * gets the dns entry in supported format with IP 127.0.0.1 or localhost. Appends comment at the end of each DNS entry containing port number with prefix %
+   * gets the dns entry in format - 127.0.0.1 $domainName # Local Custom Domain
    *
    * @param domainName The domain name whose entry is to be created in /etc/hosts.
+   * @param port The port associated with domain name.
    * @returns {string} The entry for the local domain in /etc/hosts in valid format.
    */
   private _getDNSDomainEntry(domainName: string, port: number): string {
